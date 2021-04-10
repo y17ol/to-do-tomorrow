@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Добавить видео</title>
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../../styles/specification.css">
+    <link rel="stylesheet" href="../../styles/bigBlock.css">
+    <link rel="stylesheet" href="../../styles/pages.css">
+
+    <!-- jQ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- scripts for bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- my scripts -->
+    <script src="../../scripts/htmlBlocks/bigBlocks.js"></script>
+    <script src="../../scripts/htmlBlocks/blocks.js"></script>
+    <script src="../../scripts/utils.js"></script>
+
+</head>
+
+<body>
+
+    <div class="header"></div>      
+
+    <div class="main">
+        <div class="container">  
+            <form name="addVideo" method="POST" class="addVideo">
+
+                <h2 class="headerAdd">Добавить Видеоролик</h2>
+
+                <h4>Наименование</h4>
+                <input required class="form-control form-control-lg addVideo__name" name="name" maxlength="60" placeholder="Введите название видео">
+                
+                <h4>Ссылка</h4>
+                <input required class="form-control form-control-lg addVideo__link" name="link" maxlength="150" placeholder="Вставьте ссылку на видео">
+
+                <h4>Краткое описание</h4>
+                <textarea required class="form-control form-control-lg addVideo__topic" name="topic" id="" cols="30" rows="10" placeholder="Заполните описание к видео"></textarea> 
+                <div class="addVideo__counter">Осталось символов: <span id="counter"></span></div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" id="addVideo" class="btnAdd addVideo__btn">Добавить</button>
+                </div>                
+                
+            </form>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+    <div class="modals"></div>
+
+    <script>
+        
+        document.querySelector('.header').insertAdjacentHTML('beforeend', returnMenu('../../'))
+        document.querySelector('.footer').insertAdjacentHTML('beforeend', returnFooter('../../'))
+        document.querySelector('.modals').insertAdjacentHTML('beforeend', returnModalAddSucc())
+        
+        // textArea maxCount
+        // https://ru.stackoverflow.com/questions/124050/Ограничение-количества-символов-в-textarea
+        $(document).ready(function(){
+            
+            var maxCount = 300;
+
+            $("#counter").html(maxCount);
+
+            $(".addVideo__topic").keyup(function() {
+            var revText = this.value.length;
+
+                if (this.value.length > maxCount) {
+                    this.value = this.value.substr(0, maxCount);
+                }
+                var cnt = (maxCount - revText);
+                if(cnt <= 0){$("#counter").html('0');}
+                else {$("#counter").html(cnt);}
+
+            });
+        });
+
+        $(".addVideo").submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: '../../scripts/php/addVideo.php',
+                method: 'post',
+                dataType: 'html',
+                data: $(this).serialize(),
+                success: function(data){
+                    if (data == 1) {
+                        $("#addSuсс").modal('show');
+                    } else errorAdd(data)
+                }
+            });
+        });
+
+    </script>
+    
+</body>
+
+</html>

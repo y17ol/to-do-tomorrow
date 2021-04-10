@@ -1,0 +1,167 @@
+/* - - - - - - - - - */
+/*       Тэги        */
+/* - - - - - - - - - */
+
+body {
+    font-family: 'PT Sans', sans-serif;
+    background-color: GhostWhite;
+}
+ 
+button:focus {
+    outline: none !important;
+}
+
+/* - - - - - - - - - */
+/*   Спец. классы    */
+/* - - - - - - - - - */
+
+.bold {
+    font-weight: bold;
+}
+
+/* - - - - - - - - - */
+/*       Add         */
+/* - - - - - - - - - */
+
+.btnAdd {
+    text-decoration: none !important;
+    border: 0;
+    border-radius: 7px;
+    margin-bottom: 70px;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 5px;
+    word-spacing: 15px;
+    text-shadow: 2px 2px 1px #ffffffda;
+    background-color:  #fcdb00;
+    box-shadow: 0 0 50px 2px black;
+    height: 70px;
+    width: 350px;
+}
+
+.btnAdd:hover {
+    width: 390px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgb(0, 0, 0);
+    color: #fcdb00;
+    text-shadow: none;
+    box-shadow: 0 0 50px 2px #fcdb00;
+    transition: all 0.9s ease;
+}
+
+.headerAdd {
+    text-align: center;
+    padding: 45px;
+    text-shadow: 2px 2px 1px #fcda0078;
+}
+
+/* - - - - - - - - - */
+/*   modal addSucc   */
+/* - - - - - - - - - */
+
+.modal__addSucc__header {
+    margin-left: 185px;
+}
+
+.modal__addSucc__body {
+    font-size: 24px;
+    text-align: center;
+    padding: 25px 80px;
+}
+
+.modal__addSucc__ok {
+    font-size: 22px;
+    margin: 15px auto;
+    padding: 5px 45px;
+}
+
+/* - - - - - - - - - */
+/*       card        */
+/* - - - - - - - - - */
+
+.card {
+    border: none;
+    box-shadow: 0 0 5px Grey;
+    background-color: AliceBlue;
+}
+
+.card:hover {
+    box-shadow: 0 0 5px;
+}
+
+.cardMin {
+    width: 500px;
+    max-height: 650px;      /* 580 */
+    margin-bottom: 60px;
+}
+
+.cardBig {
+    margin-bottom: 60px;
+}
+
+.cardMin h3,
+.cardBig h2,
+.cardChart h2 {
+    text-align: center;
+}
+
+.cardMin p,
+.cardChart p,
+.cardBig p {
+    text-align: justify;
+    font-size: 20px;
+}
+
+.cardMin
+.cardBig {
+    padding-bottom: 25px;
+}
+
+.date {
+    text-align: right !important;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+/* - - - - - - - - - */
+/*     card nav      */
+/* - - - - - - - - - */
+
+.cardNav {
+    margin: auto;
+    margin-bottom: 80px;
+    width: 800px;
+    text-align: center;
+}
+
+.subCardNav {
+    width: 500px;
+}
+
+.cardNav button {
+    font-size: 18px;
+    padding: 15px 25px 15px;
+    outline: none !important;
+    border: none;
+    border-radius: 10px;
+    background-color: Gainsboro	;
+}
+
+.cardNav button:hover {
+    box-shadow: 0 0 5px;
+}
+
+.cardNav > button:first-child {
+    margin-right: 35px;
+}
+
+.cardNav > button:last-child {
+    margin-left: 35px;
+}
+
+.cardNavTarget {
+    background-color: DimGrey !important;
+    color: white !important;
+    box-shadow: 0 0 20px #fcdb00 !important;
+}

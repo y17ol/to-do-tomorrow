@@ -1,0 +1,225 @@
+/* - - - - - - - - - - - - - */
+/*         main page         */
+/* - - - - - - - - - - - - - */
+
+.carousel {
+    padding: 40px 0 0;
+}
+
+.carousel-caption{
+    background-color: rgba(8, 16, 19, 0.575);
+    padding: 10px 25px 10px;
+    margin-bottom: 25px;
+    border-radius: 20px;
+}
+
+.carousel-inner {
+    border-radius: 15px;
+    box-shadow: 0 0 50px 2px Grey;
+}
+
+/* - - - - - - - - - - - - - */
+/*         video page        */
+/* - - - - - - - - - - - - - */
+
+.video {
+    margin-top: 65px;
+}
+
+.cardMin iframe {
+    height: 315px;
+}
+
+.cardBig iframe {
+    height: 500px;
+}
+
+/* - - - - - - - - - - - - - */
+/*      add-video page       */
+/* - - - - - - - - - - - - - */
+
+.addVideo__name,
+.addVideo__link,
+.addVideo__topic {
+    font-size: 24px;
+    margin-bottom: 45px;
+}
+
+.addVideo h4 {
+    padding-bottom: 18px;
+}
+
+.addVideo__topic {
+    margin-bottom: 5px;
+}
+
+.addVideo__counter {
+    margin-bottom: 40px;
+    text-align: right;
+    font-size: 18px;
+}
+
+/* - - - - - - - - - - - - - */
+/*      analytics page       */
+/* - - - - - - - - - - - - - */
+
+.chart {
+    margin-top: 65px;
+}
+
+.cardChart {
+    margin-bottom: 60px;
+    padding: 0 25px 15px;
+}
+
+.chartContainer {
+    height: 370px;
+    width: 1020px;
+    margin: 40px auto 30px;
+    box-shadow: 0 0 5px 2px Grey;
+}
+
+/* устраняем баг */
+
+/* .chartContainer > div.canvasjs-chart-container > canvas {
+    width: 1020px !important; 
+    height: 371px !important;
+} */
+
+/* width="765"
+height="278" */
+
+/* - - - - - - - - - - - - - */
+/*      add-event page       */
+/* - - - - - - - - - - - - - */
+
+.addEvent__name,
+.addEvent__image,
+.addEvent__datetime,
+.addEvent__location {
+    font-size: 24px;
+    margin-bottom: 45px;
+}
+
+.addEvent h4 {
+    padding-bottom: 18px;
+}
+
+.addEvent__content,
+.addEvent__topic,
+.addEvent__contacts {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.addEvent__counter {
+    margin-bottom: 25px;
+    text-align: right;
+    font-size: 18px;
+}
+
+.addEvent__disableTopic {
+    font-size: 22px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    margin-top: -5px;
+}
+
+input[type="checkbox"] {
+    transform:scale(1.5);
+    margin-top: 10px;
+}
+
+.addEvent > div:last-child {
+    margin-top: 45px;
+}
+
+.addEvent__image {
+    width: 100%;
+}
+
+.addEvent__image {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    color: #6c757d;
+    cursor: pointer;
+    width: 100%;
+    padding: 7px 15px;
+}
+
+.addEvent__image p {
+    margin: 0;
+}
+
+#image {
+    opacity: 0;
+    margin-bottom: -10px;
+}
+
+/* - - - - - - - - - - - - - */
+/*       events page         */
+/* - - - - - - - - - - - - - */
+
+.bigImage {
+    /* width: 100%; */
+    max-height: 500px !important;
+}
+
+.minImage {
+    width: 100%;
+}
+
+.event__details {
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 1px Grey;
+    margin-bottom: 15px;
+    padding: 5px 45px;
+}
+
+.event__details:hover {
+    box-shadow: 0 0 5px 2px black;
+    transition: all 0.5s ease;
+}
+
+.event__form {
+    padding-bottom: 10px;
+}
+
+.event__id {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.events .cardMin {
+    max-height: 2000px !important;
+}
+
+/* eventDetails */
+
+.eventDetails .bigImage {
+    margin: 50px 0;
+}
+
+.eventDetails h2 {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.eventDetails p {
+    font-size: 18px;
+    text-align: justify;
+    margin-bottom: 35px;
+}
+
+/* тестовые стили (пометка: удалить после защиты) */
+
+.carousel {
+    padding-bottom: 50px;
+}
+
+/*# sourceMappingURL=/pages.53262c57.css.map */

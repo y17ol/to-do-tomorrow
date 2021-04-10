@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Добавить данные</title>
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../../styles/specification.css">
+    <link rel="stylesheet" href="../../styles/bigBlock.css">
+    <link rel="stylesheet" href="../../styles/addAnalytics.css">
+
+    <!-- JQ & JS libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    <!-- scripts for boorstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- my scripts -->
+    <script src="../../scripts/htmlBlocks/bigBlocks.js"></script>
+    <script src="../../scripts/htmlBlocks/blocks.js"></script>
+    <script src="../../scripts/htmlBlocks/chartsBlocks.js"></script>
+    <script src="../../scripts/charts.js"></script>
+    <script src="../../scripts/utils.js"></script>
+
+</head>
+
+<body>
+
+    <div class="header"></div>    
+
+    <div class="main">
+        <div class="container">
+            <form name="addChart" class="addChart">
+
+                <h2 class="headerAdd">Добавить данные</h2>
+
+                <div class="form-group">
+                    <h4>Заголовок</h4>
+                    <input required class="form-control form-control-lg addChart__name" id="name" name="name" maxlength="40" placeholder="Введите заголовок блока &laquoГрафик&raquo">
+                </div>
+
+                <div class="form-group">
+                    <h4>Краткое описание</h4>
+                    <textarea required class="form-control form-control-lg addChart__topic" id="topic" name="topic" id="" cols="30" rows="14" placeholder="Заполните описание к графику"></textarea> 
+                    <div class="addChart__сounter">Осталось символов: <span id="counter"></span></div>
+                </div>
+
+                <div class="form-group">
+                    <h3 class="addChart__chartTitle">График</h3>
+
+                    <div class="form-group">
+                        <h4>
+                            Вид графика
+                            <button type="button" id="typeInfo" class="fa fa-info"></button>
+                        </h4>
+                        <select class="form-control custom-select addChart__type" id="type">
+                            <option value="pie">Круговая диаграмма</option>
+                            <option value="column">Гистограмма</option>
+                            <option value="pyramid">Пирамидальная диаграмма</option>
+                            <option value="scatter">Точечная диаграмма</option>
+                            <option value="multi">Линейная диаграмма</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check addChart__exportEnabled">
+                            <input class="form-check-input" type="checkbox" checked="true" id="exportEnabled">
+                            <label class="form-check-label" for="exportEnabled">
+                                Возможность печати и экспорта графика
+                            </label>
+                        </div>
+                        <div class="form-check addChart__animationEnabled">
+                            <input class="form-check-input" type="checkbox" checked="true" id="animationEnabled">
+                            <label class="form-check-label" for="animationEnabled">
+                                Анимация графика при загрузке страницы
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h4>Заголовок</h4>
+                        <input class="form-control form-control-lg addChart__title" id="title" name="title" maxlength="40" placeholder="Заголовок к графику">
+                        <h4>Подзаголовок</h4>
+                        <input class="form-control form-control-lg addChart__subTitle" id="subTitle" name="subTitle" maxlength="40" placeholder="Подзаголовок к графику">
+                    </div>
+
+                    <div class="otherOpt"></div>
+
+                </div>
+
+                <div class="form-group">
+                    <h3 class="addChart__dataTitle">Данные</h3>
+                    <input type="number" id="countData" value='0'>
+                    <div class="data"></div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" id="deleteData" class="fa fa-trash-o">&nbsp &nbsp Назад</button>
+                        <button type="button" id="addData" class="fa fa-plus-square-o">&nbsp &nbsp Еще</button>
+                    </div>
+                </div>
+
+                <div class="form-group addChart__chart">
+                    <h3>График (предпросмотр)</h3>
+                    <div id="chartContainer"></div>
+                </div>
+
+                <div class="d-flex justify-content-around">
+                    <button type="button" id="buildChart" class="btnAdd addChart__buildChart">Построить диаграмму</button>
+                    <button type="submit" id="addChart" class="btnAdd addChart__addChart">Добавить данные</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+    
+    <div class="modalAdd"></div>
+    <div class="modals"></div>
+
+    <script>
+        
+        document.querySelector('.header').insertAdjacentHTML('beforeend', returnMenu('../../'))
+        document.querySelector('.footer').insertAdjacentHTML('beforeend', returnFooter('../../'))
+        document.querySelector('.modalAdd').insertAdjacentHTML('beforeend', returnModalAddSucc())
+
+        let opt = {}
+        let data = [{}]
+
+        let dataCounter = 0
+        let multiDataCounter = []
+
+        let type
+        updateVarType()
+
+        document.querySelector('.otherOpt').insertAdjacentHTML('beforeend', returnPieOpt())
+        document.querySelector('.data').insertAdjacentHTML('beforeend', returnData(0) + returnData(1))
+        dataCounter = 2 
+
+        document.querySelector('#type').onchange = () => changeChartType()
+        document.querySelector('#addData').onclick = () => addData()
+        document.querySelector('#deleteData').onclick = () => deleteData()
+        document.querySelector('#buildChart').onclick = () => buildChart()
+
+        addEventsInfo(null)
+
+        //
+        //  Основные события
+        //
+
+        function changeChartType() {
+            
+            document.querySelector('.addChart__chart').style.display = 'none'
+            document.querySelector('#addData').innerHTML = '&nbsp &nbsp Еще'
+
+            let optToPast
+            let dataToPast
+
+            updateVarType()
+            
+            if (
+                (type == 'pie') || 
+                (type == 'pyramid')
+            ) {
+                optToPast = returnPieOpt()
+                dataToPast = returnData(0) + returnData(1)
+                
+                dataCounter = 2
+                sumDataCount(2)
+
+            } else if (type == 'column') {
+               
+                optToPast = returnColumnOpt()
+                dataToPast = returnData(0) + returnData(1)
+                
+                dataCounter = 2
+                sumDataCount(2)
+
+            } else if (
+                (type == 'scatter') || 
+                (type == 'multi') 
+            ) {
+
+                optToPast = returnScatterOpt()
+                dataToPast = returnDataGroup(0, type)
+    
+                dataCounter = 1
+                sumDataCount(1)
+                multiDataCounter[0] = 0
+
+                document.querySelector('#addData').textContent += ' график' 
+            }     
+            
+            document.querySelector('.otherOpt').innerHTML = optToPast
+            document.querySelector('.data').innerHTML = dataToPast
+
+            if (
+                (type == 'scatter') || 
+                (type == 'multi') 
+            ) {
+                document.querySelector('.dataGroup' + 0).innerHTML = returnData2(0, 0)
+                addEventsDataGroups(dataCounter - 1)
+            }
+
+            addEventsInfo(type)
+
+        }
+
+        function addData() {
+
+            updateVarType()
+
+            if (
+                (type == 'pie') || 
+                (type == 'column') || 
+                (type == 'pyramid')
+            ) {
+
+                document.querySelector('.data').insertAdjacentHTML('beforeend', returnData(dataCounter))
+                
+            } else if (
+                (type == 'scatter') || 
+                (type == 'multi')
+            ) {
+
+                document.querySelector('.data').insertAdjacentHTML('beforeend', returnDataGroup(dataCounter, type))
+                document.querySelector('.dataGroup' + dataCounter).innerHTML = returnData2(dataCounter, 0)
+
+                addEventsDataGroups(dataCounter)
+
+                multiDataCounter[dataCounter] = 0
+
+            }
+
+            dataCounter += 1
+            sumDataCount(1)
+        }
+        
+        function deleteData() {
+
+            updateVarType()
+
+            if ((type == 'pie') || (type == 'column') || (type == 'pyramid')) {
+
+                if (dataCounter > 2) {
+                    document.querySelector('.data').removeChild(document.querySelector('.data').lastElementChild)
+                    dataCounter -= 1
+                }
+
+            } else if (
+                (type == 'scatter') || 
+                (type == 'multi')
+            ) {
+
+                if (dataCounter > 1) {
+                    document.querySelector('.data').removeChild(document.querySelector('.data').lastElementChild)
+                    document.querySelector('.data').removeChild(document.querySelector('.data').lastElementChild)
+                    dataCounter -= 1
+                }
+
+            }
+
+            sumDataCount(-1)
+        }
+
+        function buildChart() {
+
+            document.querySelector('.addChart__chart').style.display = 'block'
+
+            fillDataAndOpt()
+
+            $("#chartContainer").CanvasJSChart(getOptions(data, opt))
+        }
+
+        $(".addChart").submit(function(event) {
+            event.preventDefault();
+            fillDataAndOpt()
+            $.ajax({
+                url: '../../scripts/php/addAnalytics.php',
+                method: 'post',
+                dataType: 'json',
+                data: {
+                    data: data,
+                    opt: opt,
+                    type: document.querySelector('#type').value,
+                    name: document.querySelector('#name').value,
+                    topic: document.querySelector('#topic').value
+                },
+                success: function(dataPhp){
+                    if (dataPhp == 1) {
+                        $("#addSuсс").modal('show');
+                    } else errorAdd(dataPhp)
+                }
+            });
+        });
+
+        //
+        //  Вторичные события
+        //
+
+        function addEventsDataGroups(length) {
+            
+            for (let i = 0; i <= length; i++) {
+                document.querySelector('#deleteData' + i).onclick = () => deleteDataFromDataGroup(i)
+                document.querySelector('#addData' + i).onclick = () => addDataFromDataGroup(i)
+            }
+        }
+        
+        function addDataFromDataGroup(i) {
+            
+            document.querySelector('.dataGroup' + i).insertAdjacentHTML('beforeend', returnData2(i, multiDataCounter[i] + 1))
+            multiDataCounter[i] += 1
+        }
+
+        function deleteDataFromDataGroup(i) {
+            
+            if (multiDataCounter[i] > 0) {
+                document.querySelector('.dataGroup' + i).removeChild(document.querySelector('.dataGroup' + i).lastElementChild)
+                multiDataCounter[i] -= 1
+            }
+        }
+        
+        function addEventsInfo(typeChart) {
+
+            document.querySelector('.modals').innerHTML = ''
+
+            addEventTypeInfo()
+            addEventSuffixY()
+
+            if (type == 'column') {
+
+                addEventsTitleXY()
+
+            } else if (type == 'scatter') {
+
+                addEventsTitleXY()
+                addEventSuffixX()
+
+            } else if (type == 'multi') {
+
+                addEventsTitleXY()
+                addEventSuffixX()
+                addEventSubTypeInfo()
+
+            }
+        }
+
+        function addEventTypeInfo() {
+            
+            document.querySelector('.modals').insertAdjacentHTML('beforeend', returnModalTypeInfo())
+
+            document.querySelector('#typeInfo').onclick = () => {
+                $("#modalTypeInfo").modal('show');
+            }
+        }
+
+        function addEventsTitleXY() {
+            
+            document.querySelector('.modals').insertAdjacentHTML('beforeend', returnModalTitleXYInfo())
+
+            document.querySelector('#titleXInfo').onclick = () => {
+                $("#modalTitleXYInfo").modal('show');
+            }
+            
+            document.querySelector('#titleYInfo').onclick = () => {
+                $("#modalTitleXYInfo").modal('show');
+            }
+        }
+
+        function addEventSuffixX() {
+            
+            document.querySelector('.modals').insertAdjacentHTML('beforeend', returnModalSuffixXInfo())
+
+            document.querySelector('#suffixXInfo').onclick = () => {
+                $("#modalSuffixXInfo").modal('show');
+            }
+        }
+
+        function addEventSuffixY() {
+            
+            document.querySelector('.modals').insertAdjacentHTML('beforeend', returnModalSuffixYInfo())
+
+            document.querySelector('#suffixYInfo').onclick = () => {
+                $("#modalSuffixYInfo").modal('show');
+            }
+        }
+
+        function addEventSubTypeInfo() {
+            
+            document.querySelector('.modals').insertAdjacentHTML('beforeend', returnModalSubTypeInfo())
+
+            document.querySelector('#subTypeInfo').onclick = () => {
+                $("#modalSubTypeInfo").modal('show');
+            }
+        }
+
+        // 
+        //  Основные ф-ии
+        // 
+        
+        function fillDataAndOpt() {
+
+            opt = {}
+            data = [{}]
+
+            fillOpt(
+                [ 'type', 'title', 'subTitle' ],
+                [ 'exportEnabled', 'animationEnabled' ]
+            )
+
+            if (opt.type == 'pie') {
+                
+                fillOpt(
+                    [ 'suffixY' ], 
+                    [ 'showInLegend' ] 
+                )
+
+                fillData('y', 'name')
+
+            } else if (opt.type == 'column') {
+
+                fillOpt(
+                    [ 'titleX', 'titleY', 'suffixY' ]
+                )
+
+                fillData('y', 'label')
+
+            } else if (opt.type == 'pyramid') {
+                
+                fillOpt(
+                    [ 'suffixY' ],
+                    [ 'showInLegend' ]
+                )
+
+                fillData('y', 'indexLabel')
+
+            } else if (opt.type == 'scatter') {
+
+                fillOpt(
+                    [ 'titleX', 'titleY', 'suffixX', 'suffixY'],
+                    [ 'showInLegend' ]
+                )
+
+                fillDataBIG()
+                
+            } else if (opt.type == 'multi'){
+
+                fillOpt(
+                    [ 'titleX', 'titleY', 'suffixX', 'suffixY'],
+                    [ 'showInLegend' ]
+                )
+
+                fillDataBIG()
+                
+                data.forEach( (item, index) =>                    
+                    item.type = document.querySelector('#subType' + index).value
+                )
+            }
+        }
+        
+        // 
+        //  Вспомогательные ф-ии
+        // 
+
+        function sumDataCount(number) {
+            let $dataCount = document.querySelector('#countData')
+            $dataCount.value = Number($dataCount.value) + number
+        }
+       
+        function updateVarType() {
+            type = document.querySelector('#type').value
+        }
+
+        function fillOpt(arrayOpt, arrayOptBool = []) {
+            
+            arrayOpt.forEach( (item) => 
+                opt[item] = document.querySelector('#' + item).value 
+            )
+
+            arrayOptBool.forEach( (item) => 
+                opt[item] = document.querySelector('#' + item).checked
+            )
+        }
+
+        function fillData(numberName, textName) {
+            
+            for (let i = 0; i < dataCounter; i++) {
+                data[i] = {
+                    [numberName]: Number(document.querySelector('#dataValue' + i).value),
+                    [textName]: document.querySelector('#dataName' + i).value
+                }
+            }
+        }
+
+        function fillDataBIG() {
+
+            for (let i = 0; i < dataCounter; i++) {
+
+                data[i] = {
+                    name: document.querySelector('#dataName' + i).value,
+                    dataPoints: [{}]
+                }
+
+                for (let j = 0; j <= multiDataCounter[i]; j++) {
+
+                    data[i].dataPoints[j] = {
+                        x: Number(document.querySelector('#dataX__' + i + '_' + j).value, 10), 
+                        y: Number(document.querySelector('#dataY__' + i + '_' + j).value, 10)
+                    }
+                }
+            }
+        }
+
+        // textArea maxCount
+        // https://ru.stackoverflow.com/questions/124050/Ограничение-количества-символов-в-textarea
+        $(document).ready(function(){
+
+            var maxCount = 400;
+
+            $("#counter").html(maxCount);
+
+            $("#topic").keyup(function() {
+            var revText = this.value.length;
+
+                if (this.value.length > maxCount) {
+                    this.value = this.value.substr(0, maxCount);
+                }
+                var cnt = (maxCount - revText);
+                if(cnt <= 0){$("#counter").html('0');}
+                else {$("#counter").html(cnt);}
+
+            });
+        });
+
+
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+/___/
+/___!/
+/___backups/
+/___info/
+/___test/
+/___unused/
+
+/.cache/
+/node_modules/
+
+/src/.firebase/
+/src/.firebaserc
+/src/.gitignore
+/src/firebase.json
+
+/firebase-debug.log

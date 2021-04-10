@@ -1,0 +1,17 @@
+{
+  "name": "to-do-tomorrow",
+  "version": "1.0.0",
+  "description": "Планировщик мероприятий",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "parcel ./src/index.html -p 4200 --open",
+    "build": "parcel build ./src/index.html --no-source-maps"
+  },
+  "author": "y17ol",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^5.0.0",
+    "postcss": "^8.2.9"
+  }
+}

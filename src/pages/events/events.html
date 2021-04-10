@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Мероприятия</title>
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../../styles/specification.css">
+    <link rel="stylesheet" href="../../styles/bigBlock.css">
+    <link rel="stylesheet" href="../../styles/pages.css">
+    
+    <!-- JQ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- script for bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- my scripts -->
+    <script src="../../scripts/htmlBlocks/bigBlocks.js"></script>
+    <script src="../../scripts/htmlBlocks/blocks.js"></script>
+    <script src="../../scripts/utils.js"></script>
+
+</head>
+
+<body>
+
+    <div class="header"></div>
+    
+    <div class="main events">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-12 event1"></div>
+            </div>
+
+            <div class="row d-flex ">
+                <div class="col-6 event2"></div>
+                <div class="col-6 event3 d-flex justify-content-end"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 event4"></div>
+                <div class="col-6 event5 d-flex justify-content-end"></div>
+            </div>
+
+            <div class="events__cardNav"></div>
+            
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+    <script>
+        
+        document.querySelector('.header').insertAdjacentHTML('beforeend', returnMenu('../../'))
+        document.querySelector('.footer').insertAdjacentHTML('beforeend', returnFooter('../../'))
+        document.querySelector('.events__cardNav').insertAdjacentHTML('beforeend', returnCardNav())
+
+        $(document).ready(function(){
+            $.ajax({
+                url: '../../scripts/php/selectEvents.php',
+                method: 'get',
+                dataType : "json",
+                data: $(this).serialize(),
+                success: function(data){
+
+                    let arrayEvent = data.reverse()
+                    let countPages = Math.ceil((arrayEvent.length - 1) / 4)
+                    let currentPage = 1
+                    let firstPage = 1
+                    let lastPage = ( countPages < 5 ? countPages : 5 )
+                    let countItemsOnPage = (
+                        (currentPage * 4) <= arrayEvent.length ? 
+                            4 :
+                            arrayEvent.length - (currentPage * 4 - 4) - 1
+                    )  
+
+                    document.querySelector('.event1').insertAdjacentHTML('beforeend', returnBigCardEvent(arrayEvent[0]))
+                    printEventCards(arrayEvent, currentPage, countItemsOnPage)
+                    getImage(arrayEvent[0][4], 'bigImage')
+
+                    printCardNav(firstPage, lastPage, countPages, currentPage)
+                    document.querySelector('.cardNav1').classList.add('cardNavTarget')
+
+                    if (countPages == 1) {
+                        document.querySelector('.cardNav').firstElementChild.setAttribute('disabled', 'disabled')
+                        document.querySelector('.cardNav').lastElementChild.setAttribute('disabled', 'disabled')
+                    }
+
+                    document.querySelector('.cardNav').onclick = (event) => {
+                        let arrayReturn = cardNavClick(event, 'event', 1, arrayEvent, currentPage, countPages, firstPage, lastPage)
+                        currentPage = arrayReturn[0]
+                        firstPage = arrayReturn[1]
+                        lastPage = arrayReturn[2]
+                    }
+
+                }
+            });
+        }); 
+        
+        // console.log(getImage(32))
+        // console.log(getImage(32))
+
+        // getImage(32)
+
+        function getImage(id, imageClass = ' ') {
+            let image
+            $.ajax({
+                url: '../../scripts/php/get_image.php',
+                // url: './php/get_image.php',
+                method: 'post',
+                dataType : "html",
+                data: {
+                    id: Number(id),
+                    imageClass: imageClass
+                },
+                success: function(data){
+
+                    // console.log(data)
+                    document.querySelector('#image' + id).insertAdjacentHTML('beforeend', data)
+                    
+                    
+                    // document.querySelector('#image' + id).insertAdjacentHTML('beforeend', 
+                    //     `<img src = "data:image/png;base64,` + data + `" width=200 height=200 >`
+                    // )
+
+                    // image.src = 'data:image/png;base64,'+data+' '
+                    
+                    // console.log(document.querySelector('#image51'))
+                    
+                    // console.log(data)
+                    // image = data
+                }
+            });
+            return image
+        }
+        
+    </script>
+
+</body>
+
+</html>

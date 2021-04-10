@@ -1,0 +1,254 @@
+.addChart__name,
+.addChart__topic,
+.addChart__type,
+.addChart__exportEnabled,
+.addChart__animationEnabled,
+.addChart__title,
+.addChart__subTitle,
+.addChart__titleX,
+.addChart__titleY,
+.addChart__suffixX,
+.addChart__suffixY,
+.addChart__showInLegend,
+.addChart__subType,
+.addChart__dataName,
+.addChart__data > div > span {
+    font-size: 22px;
+}
+
+/* - - - - - - - - - - - - - */
+/*           blocks          */
+/* - - - - - - - - - - - - - */
+
+.addChart > .form-group {
+    background-color: #80808010;
+    box-shadow: 0 0 5px 1px Grey;
+    padding: 15px;
+    margin-bottom: 70px;
+}
+
+.addChart > .form-group:hover {
+    background-color: #80808015;
+    box-shadow: 0 0 15px 2px rgb(100, 100, 100);
+}
+
+.addChart > .form-group > .form-group,
+.otherOpt > .form-group,
+.data > .form-group {
+    background-color: #fcda0010;;
+    box-shadow: 0 0 5px 1px LightSlateGray;
+    padding: 15px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    margin-bottom: 35px;
+}
+
+.addChart > .form-group > .form-group:hover,
+.otherOpt > .form-group:hover,
+.data > .form-group:hover {
+    background-color: #fcda0030;;
+    box-shadow: 0 0 10px 2px black;
+}
+
+.otherOpt {
+    margin-bottom: -10px;
+}
+
+.data > .form-group {
+    margin-bottom: 65px;
+}
+
+.addChart__data {
+    margin-bottom: 15px;
+}
+
+.data {
+    margin-bottom: 50px;
+}
+
+.data + div {
+    margin-bottom: 25px;
+}
+
+.data > .form-group div.d-flex {
+    margin-bottom: 15px;
+    margin-top: 45px;
+}
+
+.data > .form-group > .form-group {
+    margin-bottom: 0;
+}
+
+.addChart__сounter {
+    text-align: right;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.addChart__chart {
+    display: none;
+    padding: 100px;
+}
+
+#chartContainer {
+    height: 370px;
+    max-width: 920px;
+    margin: 0px auto;
+    margin-bottom: 30px;
+    box-shadow: 0 0 5px 2px Grey;
+}
+
+/* - - - - - - - - - - - - - */
+/*         checkbox          */
+/* - - - - - - - - - - - - - */
+
+.addChart__exportEnabled,
+.addChart__animationEnabled,
+.addChart__showInLegend {
+    margin-left: 5px;
+}
+
+input[type="checkbox"] {
+    transform:scale(1.5);
+    margin-top: 10px;
+}
+
+input[type="checkbox"]:focus {
+    outline: none !important;
+}
+
+input[type="checkbox"] + label {
+    margin-left: 15px;
+}
+
+.addChart__exportEnabled {
+    margin-bottom: 15px;
+}
+
+/* - - - - - - - - - - - - - */
+/*           titles          */
+/* - - - - - - - - - - - - - */
+
+.addChart h2 {
+    padding-bottom: 65px;
+}
+
+.addChart > .form-group > h4 {
+    padding-top: 10px;
+    padding-bottom: 18px;
+}
+
+.addChart > .form-group > h3 {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 25px;
+}
+
+.addChart > .form-group > .form-group h4,
+.otherOpt > .form-group h4,
+.data > .form-group h4 {
+    margin-bottom: 15px;
+}
+
+.data > h4 {
+    margin-bottom: 15px;
+}
+
+/* - - - - - - - - - - - - - */
+/*           inputs          */
+/* - - - - - - - - - - - - - */
+
+.addChart__title,
+.addChart__titleX,
+.addChart__suffixX {
+    margin-bottom: 50px;
+}
+
+.addChart__name {
+    margin-bottom: 10px;
+}
+
+.addChart__topic{
+    margin-bottom: 5px;
+}
+
+.addChart__dataName,
+.addChart__subType {
+    margin-bottom: 30px !important;
+}
+
+.addChart__data > input {
+    text-align: center;
+}
+
+#countData {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+/* - - - - - - - - - - - - - */
+/*          buttons          */
+/* - - - - - - - - - - - - - */
+
+button.fa-info {
+    background-color: RoyalBlue;
+    color: white;
+    font-size: 16px;
+    font-weight: normal;
+    height: 25px;
+    width: 25px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 2px Navy;
+    margin-left: 25px;
+}
+
+button.fa-info:hover {
+    background-color: Navy;
+    box-shadow: 0 0 15px 2px RoyalBlue;
+    transition: all 0.5s ease;
+}
+
+button.fa-trash-o,
+button.fa-plus-square-o {
+    font-size: 22px;
+    padding: 15px;
+    padding-left: 45px;
+    padding-right: 45px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2px Grey;
+}
+
+.data + div > button {
+    width: 500px;
+}
+
+button.fa-trash-o:hover {
+    background-color: rgba(255, 68, 0, 0.350);
+    box-shadow: 0 0 15px 5px OrangeRed;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    transition: all 0.5s ease;
+}
+
+button.fa-plus-square-o:hover {
+    background-color: rgba(153, 205, 50, 0.350);
+    box-shadow: 0 0 15px 5px ForestGreen;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    transition: all 0.5s ease;
+}
+
+.addChart__buildChart,
+.addChart__addChart {
+    width: 400px;
+    margin-top: 50px;
+    margin-bottom: 120px;
+}
+
+.addChart__buildChart:hover,
+.addChart__addChart:hover {
+    width: 400px;
+}

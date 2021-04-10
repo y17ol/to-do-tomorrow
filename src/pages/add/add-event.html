@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Добавить мероприятие</title>
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- my css -->
+    <link rel="stylesheet" href="../../styles/specification.css">
+    <link rel="stylesheet" href="../../styles/bigBlock.css">
+    <link rel="stylesheet" href="../../styles/pages.css">
+
+    <!-- jQ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- scripts for bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- my scripts -->
+    <script src="../../scripts/htmlBlocks/bigBlocks.js"></script>
+    <script src="../../scripts/htmlBlocks/blocks.js"></script>
+    <script src="../../scripts/utils.js"></script>
+
+</head>
+
+<body>
+
+    <div class="header"></div>      
+
+    <div class="main">
+        <div class="container">  
+
+            <!-- action="../../scripts/php/addEvent.php" -->
+            
+            <form name="addEvent" action="../../scripts/php/addEvent.php" method="POST" enctype="multipart/form-data" class="addEvent">
+
+                <h2 class="headerAdd">Добавить Мероприятие</h2>
+
+                <h4>Наименование</h4>
+                <input required class="form-control form-control-lg addEvent__name" name="name" maxlength="60" placeholder="Введите название мероприятия">
+                
+                <h4>Изображение</h4>
+                <label class="addEvent__image d-flex justify-content-start">
+                    <p>Загрузить</p>
+                    <input required type="file" name="image" id="image">
+                </label> 
+                
+                <h4>Описание</h4>
+                <textarea required class="form-control form-control-lg addEvent__content" name="content" cols="30" rows="10" placeholder="Заполните описание мероприятия"></textarea> 
+                <div class="addEvent__counter">Осталось символов: <span id="counter3"></span></div>
+
+                <h4>Краткое описание</h4>
+                <div class="form-check addEvent__disableTopic">
+                    <input class="form-check-input" type="checkbox" checked="true" id="disableTopic">
+                    <label class="form-check-label" for="disableTopic">
+                        Взять из описания
+                    </label>
+                </div>
+                <textarea disabled class="form-control form-control-lg addEvent__topic" name="topic" cols="30" rows="5" placeholder="Заполните краткое описание мероприятия"></textarea> 
+                <div class="addEvent__counter">Осталось символов: <span id="counter"></span></div>
+
+                <h4>Дата и время</h4>
+                <input required type="datetime-local" class="form-control form-control-lg addEvent__datetime" name="datetime">
+                
+                <h4>Местоположение</h4>
+                <input required class="form-control form-control-lg addEvent__location" name="location" maxlength="150" placeholder="Введите адрес проводимого мероприятия">
+
+                <h4>Контакты</h4>
+                <textarea required class="form-control form-control-lg addEvent__contacts" name="contacts" cols="30" rows="5" placeholder="Введите контакты организаторов мероприятие"></textarea> 
+                <div class="addEvent__counter">Осталось символов: <span id="counter2"></span></div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" id="addEvent" class="btnAdd addEvent__btn">Добавить</button>
+                </div>                
+                
+            </form>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+    <div class="modals"></div>
+
+    <script>
+        
+        document.querySelector('.header').insertAdjacentHTML('beforeend', returnMenu('../../'))
+        document.querySelector('.footer').insertAdjacentHTML('beforeend', returnFooter('../../'))
+        document.querySelector('.modals').insertAdjacentHTML('beforeend', returnModalAddSucc())
+
+        document.querySelector('.addEvent__datetime').setAttribute('min', getNowDate())
+        document.querySelector('.addEvent__datetime').value = getNowDate()
+
+        // textArea maxCount
+        // https://ru.stackoverflow.com/questions/124050/Ограничение-количества-символов-в-textarea
+        $(document).ready(function(){
+
+            var maxCount = 400;
+
+            $("#counter").html(maxCount);
+
+            $(".addEvent__topic").keyup(function() {
+                
+                var revText = this.value.length;
+
+                if (this.value.length > maxCount){
+                    this.value = this.value.substr(0, maxCount);
+                }
+                var cnt = (maxCount - revText);
+                if(cnt <= 0){$("#counter").html('0');}
+                else {$("#counter").html(cnt);}
+
+            });
+
+            $("#counter2").html(maxCount);
+
+            $(".addEvent__contacts").keyup(function() {
+                
+                var revText = this.value.length;
+
+                if (this.value.length > maxCount) {
+                    this.value = this.value.substr(0, maxCount);
+                }
+                var cnt = (maxCount - revText);
+                if(cnt <= 0){$("#counter2").html('0');}
+                else {$("#counter2").html(cnt);}
+
+            });
+            
+            var maxCount2 = 65000;
+
+            $("#counter3").html(maxCount2);
+
+            $(".addEvent__content").keyup(function() {
+                
+                var revText = this.value.length;
+
+                if (this.value.length > maxCount2) {
+                    this.value = this.value.substr(0, maxCount2);
+                }
+                var cnt = (maxCount2 - revText);
+                if(cnt <= 0){$("#counter3").html('0');}
+                else {$("#counter3").html(cnt);}
+
+            });
+
+
+        });
+
+        // $(".addEvent").submit(function(event) {
+
+        //     event.preventDefault();
+
+        //     $.ajax({
+        //         url: '../../scripts/php/addEvent.php',
+        //         method: 'post',
+        //         dataType: 'html',
+        //         data: $(this).serialize(),
+        //         success: function(data){
+        //             if (data == 1) {
+        //                 $("#addSuсс").modal('show');
+        //             } else errorAdd(data)
+        //         }
+        //     });
+
+        // });
+
+        document.querySelector('#disableTopic').onclick = () => {
+
+            if (document.querySelector('#disableTopic').checked == true) {
+
+                document.querySelector('.addEvent__topic').setAttribute('disabled', 'disabled')
+                document.querySelector('.addEvent__topic').removeAttribute('required')
+            
+            } else {
+
+                document.querySelector('.addEvent__topic').removeAttribute('disabled')
+                document.querySelector('.addEvent__topic').setAttribute('required', 'required')
+
+            }
+        }
+
+        document.querySelector('#image').onchange = () => {
+
+            $p = document.querySelector('.addEvent__image p')
+            $p.innerHTML = document.querySelector('#image').files[0].name
+            $p.style.color = 'black'
+        }
+
+    </script>
+    
+</body>
+
+</html>
